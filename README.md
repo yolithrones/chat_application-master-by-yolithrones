@@ -20,129 +20,242 @@ Setup:
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-# TaskMaster AI
+# Full Stack FastAPI Template
 
-TaskMaster AI is an AI-powered to-do manager built with **React and Node.js**. Designed to explore the capabilities of large language models (LLMs) without relying on specialized AI agent frameworks, it helps users manage tasks while delivering witty, sarcastic responses.
+<a href="https://github.com/fastapi/full-stack-fastapi-template/actions?query=workflow%3ATest" target="_blank"><img src="https://github.com/fastapi/full-stack-fastapi-template/workflows/Test/badge.svg" alt="Test"></a>
+<a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/fastapi/full-stack-fastapi-template" target="_blank"><img src="https://coverage-badge.samuelcolvin.workers.dev/fastapi/full-stack-fastapi-template.svg" alt="Coverage"></a>
 
-It leverages the **Gemini 1.5 Flash-002** model developed by Google.
-This fast and versatile multimodal model supports an input context window of up to 1,048,576 tokens and can generate up to 8,192 tokens in a single request, making it highly efficient for diverse AI tasks. 
-Best of all, access to the Gemini API is available free of charge through Google AI Studio and Vertex AI.
+## Technology Stack and Features
 
-It also leverages [Socket.IO](https://socket.io) for real-time communication between clients and the server. Each client connection is assigned a unique `socket.id`, which is used to track individual sessions, including chat history and the current to-do state.
+- ⚡ [**FastAPI**](https://fastapi.tiangolo.com) for the Python backend API.
+    - 🧰 [SQLModel](https://sqlmodel.tiangolo.com) for the Python SQL database interactions (ORM).
+    - 🔍 [Pydantic](https://docs.pydantic.dev), used by FastAPI, for the data validation and settings management.
+    - 💾 [PostgreSQL](https://www.postgresql.org) as the SQL database.
+- 🚀 [React](https://react.dev) for the frontend.
+    - 💃 Using TypeScript, hooks, Vite, and other parts of a modern frontend stack.
+    - 🎨 [Chakra UI](https://chakra-ui.com) for the frontend components.
+    - 🤖 An automatically generated frontend client.
+    - 🧪 [Playwright](https://playwright.dev) for End-to-End testing.
+    - 🦇 Dark mode support.
+- 🐋 [Docker Compose](https://www.docker.com) for development and production.
+- 🔒 Secure password hashing by default.
+- 🔑 JWT (JSON Web Token) authentication.
+- 📫 Email based password recovery.
+- ✅ Tests with [Pytest](https://pytest.org).
+- 📞 [Traefik](https://traefik.io) as a reverse proxy / load balancer.
+- 🚢 Deployment instructions using Docker Compose, including how to set up a frontend Traefik proxy to handle automatic HTTPS certificates.
+- 🏭 CI (continuous integration) and CD (continuous deployment) based on GitHub Actions.
 
-When a new client connects, a session is created and stored using their unique `socket.id`. This allows the server to manage personalized chat history and task data. When a client disconnects, its session is automatically removed.
+### Dashboard Login
 
-## Features
-- **Real-time task management:** Create, delete, categorize, and prioritize tasks.
-- **AI-driven responses:** Enjoy humorous, sarcastic interactions while managing your to-dos.
-- **Chat history & session management:** Each user connection is tracked individually for personalized interactions.
-- **Global task storage:** Todos are shared across users (since no user authentication implemented yet).
+[![API docs](img/login.png)](https://github.com/fastapi/full-stack-fastapi-template)
 
-## Tech Stack
-- **Frontend:** React, Tailwind CSS
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB Atlas
-- **Real-time Communication:** Socket.IO
-- **AI Model Integration:** Gemini 1.5 Flash-002
+### Dashboard - Admin
 
-## 📦 Installation
-### Clone the Repository
+[![API docs](img/dashboard.png)](https://github.com/fastapi/full-stack-fastapi-template)
+
+### Dashboard - Create User
+
+[![API docs](img/dashboard-create.png)](https://github.com/fastapi/full-stack-fastapi-template)
+
+### Dashboard - Items
+
+[![API docs](img/dashboard-items.png)](https://github.com/fastapi/full-stack-fastapi-template)
+
+### Dashboard - User Settings
+
+[![API docs](img/dashboard-user-settings.png)](https://github.com/fastapi/full-stack-fastapi-template)
+
+### Dashboard - Dark Mode
+
+[![API docs](img/dashboard-dark.png)](https://github.com/fastapi/full-stack-fastapi-template)
+
+### Interactive API Documentation
+
+[![API docs](img/docs.png)](https://github.com/fastapi/full-stack-fastapi-template)
+
+## How To Use It
+
+You can **just fork or clone** this repository and use it as is.
+
+✨ It just works. ✨
+
+### How to Use a Private Repository
+
+If you want to have a private repository, GitHub won't allow you to simply fork it as it doesn't allow changing the visibility of forks.
+
+But you can do the following:
+
+- Create a new GitHub repo, for example `my-full-stack`.
+- Clone this repository manually, set the name with the name of the project you want to use, for example `my-full-stack`:
+
 ```bash
- git clone https://github.com/VPS010/TaskMaster-AI_Agent
- cd TaskMaster-AI_Agent
+git clone git@github.com:fastapi/full-stack-fastapi-template.git my-full-stack
 ```
 
-### Install Dependencies and run Backend and frontend
-#### Backend
+- Enter into the new directory:
+
 ```bash
-cd backend
-npm install
-```
-#### Frontend
-```bash
-cd frontend
-npm install
+cd my-full-stack
 ```
 
-### Run the Application
-#### Start Backend Server
+- Set the new origin to your new repository, copy it from the GitHub interface, for example:
+
 ```bash
-cd backend
-npm start
+git remote set-url origin git@github.com:octocat/my-full-stack.git
 ```
-#### Start Frontend Client
+
+- Add this repo as another "remote" to allow you to get updates later:
+
 ```bash
-cd frontend
-npm run dev
+git remote add upstream git@github.com:fastapi/full-stack-fastapi-template.git
 ```
-Could also use docker-compose to start the mongodb container insted of using MongodbAtlas link in Backend.
 
+- Push the code to your new repository:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```bash
+git push -u origin master
+```
 
-## Available Scripts
+### Update From the Original Template
 
-In the project directory, you can run:
+After cloning the repository, and after doing changes, you might want to get the latest changes from this original template.
 
-### `npm start`
+- Make sure you added the original repository as a remote, you can check it with:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+git remote -v
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+origin    git@github.com:octocat/my-full-stack.git (fetch)
+origin    git@github.com:octocat/my-full-stack.git (push)
+upstream    git@github.com:fastapi/full-stack-fastapi-template.git (fetch)
+upstream    git@github.com:fastapi/full-stack-fastapi-template.git (push)
+```
 
-### `npm test`
+- Pull the latest changes without merging:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git pull --no-commit upstream master
+```
 
-### `npm run build`
+This will download the latest changes from this template without committing them, that way you can check everything is right before committing.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- If there are conflicts, solve them in your editor.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- Once you are done, commit the changes:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git merge --continue
+```
 
-### `npm run eject`
+### Configure
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+You can then update configs in the `.env` files to customize your configurations.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Before deploying it, make sure you change at least the values for:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- `SECRET_KEY`
+- `FIRST_SUPERUSER_PASSWORD`
+- `POSTGRES_PASSWORD`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You can (and should) pass these as environment variables from secrets.
 
-## Learn More
+Read the [deployment.md](./deployment.md) docs for more details.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Generate Secret Keys
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Some environment variables in the `.env` file have a default value of `changethis`.
 
-### Code Splitting
+You have to change them with a secret key, to generate secret keys you can run the following command:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```bash
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
 
-### Analyzing the Bundle Size
+Copy the content and use that as password / secret key. And run that again to generate another secure key.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## How To Use It - Alternative With Copier
 
-### Making a Progressive Web App
+This repository also supports generating a new project using [Copier](https://copier.readthedocs.io).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+It will copy all the files, ask you configuration questions, and update the `.env` files with your answers.
 
-### Advanced Configuration
+### Install Copier
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+You can install Copier with:
 
-### Deployment
+```bash
+pip install copier
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Or better, if you have [`pipx`](https://pipx.pypa.io/), you can run it with:
 
-### `npm run build` fails to minify
+```bash
+pipx install copier
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**Note**: If you have `pipx`, installing copier is optional, you could run it directly.
+
+### Generate a Project With Copier
+
+Decide a name for your new project's directory, you will use it below. For example, `my-awesome-project`.
+
+Go to the directory that will be the parent of your project, and run the command with your project's name:
+
+```bash
+copier copy https://github.com/fastapi/full-stack-fastapi-template my-awesome-project --trust
+```
+
+If you have `pipx` and you didn't install `copier`, you can run it directly:
+
+```bash
+pipx run copier copy https://github.com/fastapi/full-stack-fastapi-template my-awesome-project --trust
+```
+
+**Note** the `--trust` option is necessary to be able to execute a [post-creation script](https://github.com/fastapi/full-stack-fastapi-template/blob/master/.copier/update_dotenv.py) that updates your `.env` files.
+
+### Input Variables
+
+Copier will ask you for some data, you might want to have at hand before generating the project.
+
+But don't worry, you can just update any of that in the `.env` files afterwards.
+
+The input variables, with their default values (some auto generated) are:
+
+- `project_name`: (default: `"FastAPI Project"`) The name of the project, shown to API users (in .env).
+- `stack_name`: (default: `"fastapi-project"`) The name of the stack used for Docker Compose labels and project name (no spaces, no periods) (in .env).
+- `secret_key`: (default: `"changethis"`) The secret key for the project, used for security, stored in .env, you can generate one with the method above.
+- `first_superuser`: (default: `"admin@example.com"`) The email of the first superuser (in .env).
+- `first_superuser_password`: (default: `"changethis"`) The password of the first superuser (in .env).
+- `smtp_host`: (default: "") The SMTP server host to send emails, you can set it later in .env.
+- `smtp_user`: (default: "") The SMTP server user to send emails, you can set it later in .env.
+- `smtp_password`: (default: "") The SMTP server password to send emails, you can set it later in .env.
+- `emails_from_email`: (default: `"info@example.com"`) The email account to send emails from, you can set it later in .env.
+- `postgres_password`: (default: `"changethis"`) The password for the PostgreSQL database, stored in .env, you can generate one with the method above.
+- `sentry_dsn`: (default: "") The DSN for Sentry, if you are using it, you can set it later in .env.
+
+## Backend Development
+
+Backend docs: [backend/README.md](./backend/README.md).
+
+## Frontend Development
+
+Frontend docs: [frontend/README.md](./frontend/README.md).
+
+## Deployment
+
+Deployment docs: [deployment.md](./deployment.md).
+
+## Development
+
+General development docs: [development.md](./development.md).
+
+This includes using Docker Compose, custom local domains, `.env` configurations, etc.
+
+## Release Notes
+
+Check the file [release-notes.md](./release-notes.md).
+
+## License
+
+The Full Stack FastAPI Template is licensed under the terms of the MIT license.
